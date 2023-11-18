@@ -15,8 +15,8 @@ const IconUI = ({ faIcon, action, disabled }: IconUIProps) => {
       onClick={action}
       icon={faIcon}
       className={clsx(
-        "w-6 h-6 text-slate-40",
-        !disabled && "hover:text-slate-500 hover:cursor-pointer",
+        "w-6 h-6 text-slate-500",
+        !disabled && "hover:text-slate-600 hover:cursor-pointer",
       )}
     />
   );

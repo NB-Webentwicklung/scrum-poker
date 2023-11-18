@@ -1,24 +1,18 @@
-import clsx from "clsx";
-import React, { useState } from "react";
-import Player from "./Player";
+import React, { use, useState } from "react";
 import Image from "next/image";
 import Logo from "public/logo.png";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import IconUI from "./ui/IconUI";
+import IconUI from "../ui/IconUI";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user-store";
+import clsx from "clsx";
 
-interface GameProps {
-  gameId: string;
-  exitGame: () => void;
-}
-
-const Game = ({ gameId, exitGame }: GameProps) => {
-  const [revealed, setRevealed] = useState(false);
+const GameNavigation = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-  const router = useRouter();
 
   const user = useUserStore((state) => state.user);
+  const exitGame = useUserStore((state) => state.exitGame);
+  const router = useRouter();
 
   return (
     <div>
@@ -50,7 +44,10 @@ const Game = ({ gameId, exitGame }: GameProps) => {
               New Game
             </button>
             <button
-              onClick={exitGame}
+              onClick={() => {
+                exitGame();
+                router.push("/");
+              }}
               className='p-2 text-sm w-full rounded-md bg-red-300'
             >
               Exit Game
@@ -60,24 +57,8 @@ const Game = ({ gameId, exitGame }: GameProps) => {
 
         <p className='font-medium'>{user?.name}</p>
       </div>
-      <div className='py-20'>
-        <Player revealed={revealed} className='pb-8' />
-        <div className='flex justify-center'>
-          <div className='border-2 border-slate-600 w-1/2 rounded-lg p-8 h-40 flex justify-center items-center'>
-            <button
-              onClick={() => setRevealed(!revealed)}
-              className={clsx(
-                "bg-blue-300  rounded-lg w-40 py-3 hover:bg-blue-400",
-              )}
-            >
-              {revealed ? "Start new voting" : "Reveal Cards"}
-            </button>
-          </div>
-        </div>
-        <Player revealed={revealed} className='pt-8' />
-      </div>
     </div>
   );
 };
 
-export default Game;
+export default GameNavigation;

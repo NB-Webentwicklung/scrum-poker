@@ -1,20 +1,18 @@
 import React from "react";
-import NavigationHeader from "./NavigationHeader";
+import NavigationHeader from "../NavigationHeader";
 import { Form, Formik } from "formik";
-import InputUI from "../ui/InputUI";
-import ButtonUI from "../ui/ButtonUI";
+import InputUI from "../../ui/InputUI";
+import ButtonUI from "../../ui/ButtonUI";
 import { GameScheama } from "@/schemas/schema";
 import { useUserStore } from "@/store/user-store";
 import { generateRandomId } from "@/utils/randomId";
 
 interface CreateGameProps {
-  startGameAction: () => void;
+  createGameAction: (game: string) => void;
   goBack: () => void;
 }
 
-const CreateGame = ({ startGameAction, goBack }: CreateGameProps) => {
-  const setUser = useUserStore((state) => state.setUser);
-
+const CreateGame = ({ createGameAction, goBack }: CreateGameProps) => {
   return (
     <div className='w-1/2 mx-auto'>
       <NavigationHeader goBack={goBack} />
@@ -22,14 +20,7 @@ const CreateGame = ({ startGameAction, goBack }: CreateGameProps) => {
         initialValues={{ game: "" }}
         validationSchema={GameScheama}
         onSubmit={(values) => {
-          startGameAction();
-          setUser({
-            id: generateRandomId(),
-            game: {
-              id: "1",
-              name: values.game,
-            },
-          });
+          createGameAction(values.game);
         }}
       >
         {({ errors }) => (

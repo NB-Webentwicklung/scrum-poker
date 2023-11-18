@@ -8,13 +8,13 @@ import {
   faMeta,
   faMicrosoft,
 } from "@fortawesome/free-brands-svg-icons";
-import IconUI from "../ui/IconUI";
+import IconUI from "../../ui/IconUI";
 
 interface LandingProps {
-  createGameAction: () => void;
+  createUserIdAction: () => void;
 }
 
-const Landing = ({ createGameAction }: LandingProps) => {
+const Landing = ({ createUserIdAction }: LandingProps) => {
   const icons = [faGoogle, faMicrosoft, faApple, faMeta];
   return (
     <div className='md:mt-40'>
@@ -28,7 +28,7 @@ const Landing = ({ createGameAction }: LandingProps) => {
             Simple and fun story point estimations.
           </p>
           <button
-            onClick={createGameAction}
+            onClick={createUserIdAction}
             className='text-lg bg-blue-300 px-10 py-3 rounded-lg mt-4 hover:bg-blue-400'
           >
             Create a new game
