@@ -1,7 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "public/logo.png";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
+import Logo from "public/logo.png";
+
 import IconUI from "../ui/IconUI";
 
 interface NavigationHeaderProps {

@@ -1,11 +1,12 @@
-import React, { use, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import Logo from "public/logo.png";
-import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
-import IconUI from "../ui/IconUI";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user-store";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
+import Logo from "public/logo.png";
+
+import IconUI from "../ui/IconUI";
 
 const GameNavigation = () => {
   const [showDropdown, setShowDropdown] = useState(false);

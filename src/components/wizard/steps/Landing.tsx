@@ -1,13 +1,13 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
-import StartImage from "public/start.png";
 import {
   faApple,
   faGoogle,
   faMeta,
   faMicrosoft,
 } from "@fortawesome/free-brands-svg-icons";
+import StartImage from "public/start.png";
+
 import IconUI from "../../ui/IconUI";
 
 interface LandingProps {

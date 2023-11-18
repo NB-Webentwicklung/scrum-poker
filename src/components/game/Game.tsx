@@ -1,13 +1,10 @@
-import clsx from "clsx";
 import React, { useState } from "react";
+import clsx from "clsx";
+
 import Player from "../Player";
 import GameNavigation from "./GameNavigation";
 
-interface GameProps {
-  gameId: string;
-}
-
-const Game = ({ gameId }: GameProps) => {
+const Game = () => {
   const [revealed, setRevealed] = useState(false);
 
   return (

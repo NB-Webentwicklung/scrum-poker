@@ -1,12 +1,12 @@
 import React from "react";
-import Landing from "./steps/Landing";
-import CreateGame from "./steps/CreateGame";
-import ChooseName from "./steps/ChooseName";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/store/user-store";
 
+import ChooseName from "./steps/ChooseName";
+import CreateGame from "./steps/CreateGame";
+import Landing from "./steps/Landing";
+
 const Wizard = () => {
-  const router = useRouter();
   const user = useUserStore((state) => state.user);
   const createUserId = useUserStore((state) => state.createUserId);
   const createGame = useUserStore((state) => state.createGame);

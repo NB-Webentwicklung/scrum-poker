@@ -1,11 +1,10 @@
 import React from "react";
-import NavigationHeader from "../NavigationHeader";
-import { Form, Formik } from "formik";
-import InputUI from "../../ui/InputUI";
-import ButtonUI from "../../ui/ButtonUI";
 import { GameScheama } from "@/schemas/schema";
-import { useUserStore } from "@/store/user-store";
-import { generateRandomId } from "@/utils/randomId";
+import { Form, Formik } from "formik";
+
+import ButtonUI from "../../ui/ButtonUI";
+import InputUI from "../../ui/InputUI";
+import NavigationHeader from "../NavigationHeader";
 
 interface CreateGameProps {
   createGameAction: (game: string) => void;

@@ -1,12 +1,12 @@
 import React from "react";
-
-import NavigationHeader from "../NavigationHeader";
-import { Form, Formik } from "formik";
-import InputUI from "../../ui/InputUI";
-import ButtonUI from "../../ui/ButtonUI";
+import { useRouter } from "next/navigation";
 import { NameSchema } from "@/schemas/schema";
 import { useUserStore } from "@/store/user-store";
-import { useRouter } from "next/navigation";
+import { Form, Formik } from "formik";
+
+import ButtonUI from "../../ui/ButtonUI";
+import InputUI from "../../ui/InputUI";
+import NavigationHeader from "../NavigationHeader";
 
 interface ChooseNameProps {
   joinGameAction: (name: string) => void;

@@ -1,5 +1,4 @@
 import { generateRandomId } from "@/utils/randomId";
-import { useRouter } from "next/navigation";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
@@ -17,7 +16,6 @@ export interface IUser {
 }
 interface UserProps {
   user: IUser | null;
-  logout: () => void;
   createUserId: () => void;
   createGame: (name: string) => void;
   joinGame: (name: string) => void;
@@ -34,9 +32,6 @@ export const useUserStore = create<UserProps>()(
     (set, get) => ({
       ...initialUserState,
 
-      logout: () => {
-        set({ user: null });
-      },
       createUserId: () => {
         set({
           user: {
