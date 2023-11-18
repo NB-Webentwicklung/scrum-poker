@@ -49,6 +49,6 @@ Interested in contributing to the Scrum Poker Game? Please read our CONTRIBUTING
 
 For issues or questions, please open an issue on our GitHub issues page: `https://github.com/snickers03/scrum-poker/issues`.
 
-<!-- ## License
+## License
 
-This project is released under the MIT License. See the LICENSE file for more details. -->
+This project is released under the MIT License. See the LICENSE file for more details.
