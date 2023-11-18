@@ -1,13 +1,12 @@
 import React from "react";
-import Image from "next/image";
-import Logo from "public/logo.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBackward } from "@fortawesome/free-solid-svg-icons";
+
 import NavigationHeader from "./NavigationHeader";
 import { Form, Formik } from "formik";
 import InputUI from "../ui/InputUI";
 import ButtonUI from "../ui/ButtonUI";
-import * as Yup from "yup";
+import { NameSchema } from "@/schemas/schema";
+import { useUserStore } from "@/store/user-store";
+import { generateRandomId } from "@/utils/randomId";
 
 interface ChooseNameProps {
   joinGameAction: () => void;
@@ -15,9 +14,8 @@ interface ChooseNameProps {
 }
 
 const ChooseName = ({ joinGameAction, goBack }: ChooseNameProps) => {
-  const NameSchema = Yup.object().shape({
-    name: Yup.string().required("* Name is required"),
-  });
+  const user = useUserStore((state) => state.user);
+  const setUser = useUserStore((state) => state.setUser);
 
   return (
     <div className='w-1/2 mx-auto'>
@@ -25,7 +23,12 @@ const ChooseName = ({ joinGameAction, goBack }: ChooseNameProps) => {
       <Formik
         initialValues={{ name: "" }}
         validationSchema={NameSchema}
-        onSubmit={() => {
+        onSubmit={(values) => {
+          setUser({
+            id: user?.id ?? generateRandomId(),
+            game: user?.game ?? null,
+            name: values.name,
+          });
           joinGameAction();
         }}
       >
@@ -33,7 +36,7 @@ const ChooseName = ({ joinGameAction, goBack }: ChooseNameProps) => {
           <Form>
             <InputUI
               label='Name'
-              placeholder='Display Name'
+              placeholder='Your Name'
               name='name'
               error={errors.name}
             />

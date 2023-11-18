@@ -1,9 +1,11 @@
 import React from "react";
 import NavigationHeader from "./NavigationHeader";
-import { Field, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import InputUI from "../ui/InputUI";
 import ButtonUI from "../ui/ButtonUI";
-import * as Yup from "yup";
+import { GameScheama } from "@/schemas/schema";
+import { useUserStore } from "@/store/user-store";
+import { generateRandomId } from "@/utils/randomId";
 
 interface CreateGameProps {
   startGameAction: () => void;
@@ -11,9 +13,7 @@ interface CreateGameProps {
 }
 
 const CreateGame = ({ startGameAction, goBack }: CreateGameProps) => {
-  const GameScheama = Yup.object().shape({
-    game: Yup.string().required("* Game name is required"),
-  });
+  const setUser = useUserStore((state) => state.setUser);
 
   return (
     <div className='w-1/2 mx-auto'>
@@ -21,8 +21,15 @@ const CreateGame = ({ startGameAction, goBack }: CreateGameProps) => {
       <Formik
         initialValues={{ game: "" }}
         validationSchema={GameScheama}
-        onSubmit={() => {
+        onSubmit={(values) => {
           startGameAction();
+          setUser({
+            id: generateRandomId(),
+            game: {
+              id: "1",
+              name: values.game,
+            },
+          });
         }}
       >
         {({ errors }) => (

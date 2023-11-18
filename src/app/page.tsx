@@ -39,7 +39,15 @@ export default function Home() {
           }}
         />
       )}
-      {gameId && <Game gameId={gameId} />}
+      {gameId && (
+        <Game
+          gameId={gameId}
+          exitGame={() => {
+            router.push("/");
+            setStep("landing");
+          }}
+        />
+      )}
     </main>
   );
 }
