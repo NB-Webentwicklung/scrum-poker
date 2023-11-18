@@ -4,6 +4,10 @@ import Logo from "public/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBackward } from "@fortawesome/free-solid-svg-icons";
 import NavigationHeader from "./NavigationHeader";
+import { Form, Formik } from "formik";
+import InputUI from "../ui/InputUI";
+import ButtonUI from "../ui/ButtonUI";
+import * as Yup from "yup";
 
 interface ChooseNameProps {
   joinGameAction: () => void;
@@ -11,25 +15,32 @@ interface ChooseNameProps {
 }
 
 const ChooseName = ({ joinGameAction, goBack }: ChooseNameProps) => {
+  const NameSchema = Yup.object().shape({
+    name: Yup.string().required("* Name is required"),
+  });
+
   return (
-    <div>
-      <div className='w-1/2 mx-auto'>
-        <NavigationHeader goBack={goBack} />
-        <div>
-          <p className='pl-2 pb-1 text-lg'>Display Name</p>
-          <input
-            className='px-4 py-3 outline-none border-2 border-slate-700 rounded-lg w-full'
-            type='text'
-            placeholder='Name'
-          />
-          <button
-            onClick={joinGameAction}
-            className='w-full py-3 bg-blue-300 hover:bg-blue-400 rounded-lg mt-4'
-          >
-            Join game
-          </button>
-        </div>
-      </div>
+    <div className='w-1/2 mx-auto'>
+      <NavigationHeader goBack={goBack} />
+      <Formik
+        initialValues={{ name: "" }}
+        validationSchema={NameSchema}
+        onSubmit={() => {
+          joinGameAction();
+        }}
+      >
+        {({ errors }) => (
+          <Form>
+            <InputUI
+              label='Name'
+              placeholder='Display Name'
+              name='name'
+              error={errors.name}
+            />
+            <ButtonUI label='Join Game' />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };

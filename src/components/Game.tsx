@@ -1,35 +1,44 @@
 import clsx from "clsx";
 import React from "react";
+import Player from "./Player";
+import Image from "next/image";
+import Logo from "public/logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import IconUI from "./ui/IconUI";
 
-const Game = () => {
+interface GameProps {
+  gameId: string;
+}
+
+const Game = ({ gameId }: GameProps) => {
   const [revealed, setRevealed] = React.useState(false);
 
   return (
-    <div className='mt-52'>
-      <div className='flex justify-center'>
-        <div className='border-2 border-slate-600 w-1/2 rounded-lg p-8 h-40 flex justify-center items-center'>
-          <button
-            onClick={() => setRevealed(!revealed)}
-            className={clsx(
-              "bg-blue-300  rounded-lg w-40 py-3 hover:bg-blue-400",
-            )}
-          >
-            {revealed ? "Start new voting" : "Reveal Cards"}
-          </button>
+    <div>
+      <div className='flex justify-between'>
+        <div className='flex space-x-2 items-center'>
+          <Image src={Logo} width={36} height={36} alt='logo' />
+          <p className='text-lg font-medium'>{gameId}</p>
+          <IconUI faIcon={faCaretDown} />
         </div>
+        <p className='font-medium'>Niklas</p>
       </div>
-      <div className=''>
-        <div className='flex justify-center mt-8'>
-          <div
-            className={clsx(
-              "border-2 border-slate-600 items-center justify-center flex rounded-lg w-12 h-20",
-              !revealed && "bg-blue-300",
-            )}
-          >
-            <p className={clsx("text-2xl", !revealed && "hidden")}>5</p>
+      <div className='py-20'>
+        <Player revealed={revealed} className='pb-8' />
+        <div className='flex justify-center'>
+          <div className='border-2 border-slate-600 w-1/2 rounded-lg p-8 h-40 flex justify-center items-center'>
+            <button
+              onClick={() => setRevealed(!revealed)}
+              className={clsx(
+                "bg-blue-300  rounded-lg w-40 py-3 hover:bg-blue-400",
+              )}
+            >
+              {revealed ? "Start new voting" : "Reveal Cards"}
+            </button>
           </div>
         </div>
-        <p className='text-center font-bold pt-2'>Niklas</p>
+        <Player revealed={revealed} className='pt-8' />
       </div>
     </div>
   );

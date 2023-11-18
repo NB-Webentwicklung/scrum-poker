@@ -8,6 +8,7 @@ import {
   faMeta,
   faMicrosoft,
 } from "@fortawesome/free-brands-svg-icons";
+import IconUI from "../ui/IconUI";
 
 interface LandingProps {
   createGameAction: () => void;
@@ -16,8 +17,8 @@ interface LandingProps {
 const Landing = ({ createGameAction }: LandingProps) => {
   const icons = [faGoogle, faMicrosoft, faApple, faMeta];
   return (
-    <>
-      <div className='grid grid-cols-2 gap-4'>
+    <div className='md:mt-40'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='py-10'>
           <h1 className='text-4xl font-bold'>
             Scrum Poker for <br />
@@ -35,19 +36,15 @@ const Landing = ({ createGameAction }: LandingProps) => {
           <p className='text-slate-500 pt-20 pb-2'>Trusted by teams at</p>
           <div className='flex space-x-8'>
             {icons.map((icon, index) => (
-              <FontAwesomeIcon
-                key={index}
-                icon={icon}
-                className='w-6 h-6 text-slate-500'
-              />
+              <IconUI key={index} faIcon={icon} />
             ))}
           </div>
         </div>
-        <div>
+        <div className='hidden md:block'>
           <Image src={StartImage} width={430} height={430} alt='start-image' />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

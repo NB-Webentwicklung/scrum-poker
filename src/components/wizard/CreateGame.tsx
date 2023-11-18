@@ -1,5 +1,9 @@
 import React from "react";
 import NavigationHeader from "./NavigationHeader";
+import { Field, Form, Formik } from "formik";
+import InputUI from "../ui/InputUI";
+import ButtonUI from "../ui/ButtonUI";
+import * as Yup from "yup";
 
 interface CreateGameProps {
   startGameAction: () => void;
@@ -7,25 +11,32 @@ interface CreateGameProps {
 }
 
 const CreateGame = ({ startGameAction, goBack }: CreateGameProps) => {
+  const GameScheama = Yup.object().shape({
+    game: Yup.string().required("* Game name is required"),
+  });
+
   return (
-    <div>
-      <div className='w-1/2 mx-auto'>
-        <NavigationHeader goBack={goBack} />
-        <div>
-          <p className='pl-2 pb-1 text-lg'>Game</p>
-          <input
-            className='px-4 py-3 outline-none border-2 border-slate-700 rounded-lg w-full'
-            type='text'
-            placeholder="Game's name"
-          />
-          <button
-            onClick={startGameAction}
-            className='w-full py-3 bg-blue-300 hover:bg-blue-400 rounded-lg mt-4'
-          >
-            Create game
-          </button>
-        </div>
-      </div>
+    <div className='w-1/2 mx-auto'>
+      <NavigationHeader goBack={goBack} />
+      <Formik
+        initialValues={{ game: "" }}
+        validationSchema={GameScheama}
+        onSubmit={() => {
+          startGameAction();
+        }}
+      >
+        {({ errors }) => (
+          <Form>
+            <InputUI
+              label='Game'
+              placeholder="Game's name"
+              name='game'
+              error={errors.game}
+            />
+            <ButtonUI label='Create Game' />
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 };
