@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Room {
+  id      Int      @id @default(autoincrement())
+  name    String
+  players Player[]
+}
+
+model Player {
+  id     Int    @id @default(autoincrement())
+  name   String
+  roomId Int
+  room   Room   @relation(fields: [roomId], references: [id])
+  votes  Vote[]
+
+  @@index([roomId])
+}
+
+model Vote {
+  id       Int    @id @default(autoincrement())
+  playerId Int
+  vote     String
+  player   Player @relation(fields: [playerId], references: [id])
+
+  @@index([playerId])
+}
