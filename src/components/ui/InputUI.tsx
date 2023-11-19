@@ -6,9 +6,16 @@ interface InputUIProps {
   placeholder: string;
   name: string;
   error: string | undefined;
+  autofocus?: boolean;
 }
 
-const InputUI = ({ label, placeholder, name, error }: InputUIProps) => {
+const InputUI = ({
+  label,
+  placeholder,
+  name,
+  error,
+  autofocus = false,
+}: InputUIProps) => {
   return (
     <div>
       <div className='flex items-center justify-between'>
@@ -21,6 +28,7 @@ const InputUI = ({ label, placeholder, name, error }: InputUIProps) => {
         name={name}
         className='px-4 py-3 outline-none border-2 border-slate-500 rounded-lg w-full'
         placeholder={placeholder}
+        autoFocus={autofocus}
       />
     </div>
   );

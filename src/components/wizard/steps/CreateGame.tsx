@@ -33,6 +33,7 @@ const CreateGame = ({ createGameAction, goBack }: CreateGameProps) => {
               placeholder="Game's name"
               name='game'
               error={errors.game}
+              autofocus
             />
             <ButtonUI label='Create Game' />
           </Form>

@@ -35,6 +35,7 @@ const ChooseName = ({ createGameAction, goBack }: ChooseNameProps) => {
               placeholder='Your Name'
               name='name'
               error={errors.name}
+              autofocus
             />
             <ButtonUI label='Join Game' />
           </Form>
