@@ -31,7 +31,12 @@ To set up the Scrum Poker Game on your local machine, follow these steps:
 
    - Run `npm install` to install the required packages.
 
-3. Run the Application
+3. Create .env file
+
+   - Rename .env.example to .evn
+   - Create own database connection
+
+4. Run the Application
    - Start the development server with `npm run dev`.
    - Open `http://localhost:3000` in your browser to view the application.
 
