@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@/store/user-store";
+import { useUserStore } from "@/store/userStore";
 import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 import clsx from "clsx";
 import Logo from "public/logo.png";
@@ -14,6 +14,8 @@ const GameNavigation = () => {
   const user = useUserStore((state) => state.user);
   const exitGame = useUserStore((state) => state.exitGame);
   const router = useRouter();
+
+  if (!user) return null;
 
   return (
     <div>

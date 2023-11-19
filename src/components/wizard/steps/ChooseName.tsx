@@ -1,31 +1,31 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { NameSchema } from "@/schemas/schema";
-import { useUserStore } from "@/store/user-store";
+import { useUserStore } from "@/store/userStore";
 import { Form, Formik } from "formik";
 
 import ButtonUI from "../../ui/ButtonUI";
 import InputUI from "../../ui/InputUI";
-import NavigationHeader from "../NavigationHeader";
+import WizardNavigation from "../WizardNavigation";
 
 interface ChooseNameProps {
-  joinGameAction: (name: string) => void;
+  createGameAction: (name: string) => void;
   goBack: () => void;
 }
 
-const ChooseName = ({ joinGameAction, goBack }: ChooseNameProps) => {
+const ChooseName = ({ createGameAction, goBack }: ChooseNameProps) => {
   const user = useUserStore((state) => state.user);
   const router = useRouter();
 
   return (
     <div className='w-1/2 mx-auto'>
-      <NavigationHeader goBack={goBack} />
+      <WizardNavigation goBack={goBack} />
       <Formik
         initialValues={{ name: "" }}
         validationSchema={NameSchema}
         onSubmit={(values) => {
-          joinGameAction(values.name);
-          router.push(`/?id=${user?.game?.id}`);
+          createGameAction(values.name);
+          router.push(`/?roomId=${user?.game?.id}`);
         }}
       >
         {({ errors }) => (

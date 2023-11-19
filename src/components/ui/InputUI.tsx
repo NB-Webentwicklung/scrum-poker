@@ -1,14 +1,14 @@
 import React from "react";
 import { Field } from "formik";
 
-interface InputUI {
+interface InputUIProps {
   label: string;
   placeholder: string;
   name: string;
   error: string | undefined;
 }
 
-const InputUI = ({ label, placeholder, name, error }: InputUI) => {
+const InputUI = ({ label, placeholder, name, error }: InputUIProps) => {
   return (
     <div>
       <div className='flex items-center justify-between'>

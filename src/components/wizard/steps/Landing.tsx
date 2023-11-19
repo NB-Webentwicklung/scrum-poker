@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
+import { useUserStore } from "@/store/userStore";
 import {
   faApple,
   faGoogle,
@@ -8,16 +9,34 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import StartImage from "public/start.png";
 
+import UserHeader from "@/components/UserHeader";
+
 import IconUI from "../../ui/IconUI";
 
 interface LandingProps {
-  createUserIdAction: () => void;
+  startAction: () => void;
 }
 
-const Landing = ({ createUserIdAction }: LandingProps) => {
+const Landing = ({ startAction }: LandingProps) => {
+  const user = useUserStore((state) => state.user);
+  const loginWithLocalStorage = useUserStore(
+    (state) => state.loginWithLocalStorage,
+  );
+
+  useEffect(() => {
+    const id = localStorage.getItem("playerId");
+    const name = localStorage.getItem("playerName");
+    if (id && name) {
+      loginWithLocalStorage(id, name);
+    }
+  }, [loginWithLocalStorage]);
+
   const icons = [faGoogle, faMicrosoft, faApple, faMeta];
   return (
     <div className='md:mt-40'>
+      {user.name && (
+        <UserHeader playerName={user.name} startAction={startAction} />
+      )}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='py-10'>
           <h1 className='text-4xl font-bold'>
@@ -28,7 +47,7 @@ const Landing = ({ createUserIdAction }: LandingProps) => {
             Simple and fun story point estimations.
           </p>
           <button
-            onClick={createUserIdAction}
+            onClick={startAction}
             className='text-lg bg-blue-300 px-10 py-3 rounded-lg mt-4 hover:bg-blue-400'
           >
             Create a new game

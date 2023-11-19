@@ -5,11 +5,11 @@ import Logo from "public/logo.png";
 
 import IconUI from "../ui/IconUI";
 
-interface NavigationHeaderProps {
+interface WizardNavigationProps {
   goBack: () => void;
 }
 
-const NavigationHeader = ({ goBack }: NavigationHeaderProps) => {
+const WizardNavigation = ({ goBack }: WizardNavigationProps) => {
   return (
     <div className='flex items-center justify-between pb-8'>
       <div className='flex items-center space-x-2'>
@@ -21,4 +21,4 @@ const NavigationHeader = ({ goBack }: NavigationHeaderProps) => {
   );
 };
 
-export default NavigationHeader;
+export default WizardNavigation;

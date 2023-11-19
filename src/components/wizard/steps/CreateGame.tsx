@@ -4,7 +4,7 @@ import { Form, Formik } from "formik";
 
 import ButtonUI from "../../ui/ButtonUI";
 import InputUI from "../../ui/InputUI";
-import NavigationHeader from "../NavigationHeader";
+import WizardNavigation from "../WizardNavigation";
 
 interface CreateGameProps {
   createGameAction: (game: string) => void;
@@ -14,7 +14,7 @@ interface CreateGameProps {
 const CreateGame = ({ createGameAction, goBack }: CreateGameProps) => {
   return (
     <div className='w-1/2 mx-auto'>
-      <NavigationHeader goBack={goBack} />
+      <WizardNavigation goBack={goBack} />
       <Formik
         initialValues={{ game: "" }}
         validationSchema={GameScheama}

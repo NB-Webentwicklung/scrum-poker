@@ -7,7 +7,7 @@ import Wizard from "@/components/wizard/Wizard";
 
 export default function Home() {
   const searchParams = useSearchParams();
-  const gameId = searchParams.get("id");
+  const roomId = searchParams.get("roomId");
 
-  return <main className='mt-14'>{gameId ? <Game /> : <Wizard />}</main>;
+  return <main className='mt-14'>{roomId ? <Game /> : <Wizard />}</main>;
 }
