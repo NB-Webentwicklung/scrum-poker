@@ -20,6 +20,10 @@ const CreateGame = ({ createGameAction, goBack }: CreateGameProps) => {
         validationSchema={GameScheama}
         onSubmit={(values) => {
           createGameAction(values.game);
+          // TODO: go direct to game if localStorage has a name
+          // if (user.name) {
+          //   router.push(`/?roomId=${user?.game?.id}`);
+          // }
         }}
       >
         {({ errors }) => (

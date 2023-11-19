@@ -24,3 +24,7 @@ export async function createGameRoom(name: string) {
 export async function createUser(name: string, roomId: string) {
   return await fetchWithJson(`${apiUrl}/player`, "POST", { name, roomId });
 }
+
+export async function checkRoomExists(roomId: string) {
+  return await fetchWithJson(`${apiUrl}/room/${roomId}`, "GET");
+}

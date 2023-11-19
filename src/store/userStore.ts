@@ -1,8 +1,16 @@
-import { createGameRoom, createUser } from "@/services/api.service";
+import {
+  checkRoomExists,
+  createGameRoom,
+  createUser,
+} from "@/services/api.service";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
-import { CurrentStep, InitialUserStateProps, UserProps } from "./userProps";
+import {
+  CurrentStep,
+  InitialUserStateProps,
+  UserProps,
+} from "./userStore.types";
 
 export const initialUserState: InitialUserStateProps = {
   user: {
@@ -30,7 +38,7 @@ export const useUserStore = create<UserProps>()(
         set({
           user: {
             ...get().user,
-            currentStep: "chooseName",
+            currentStep: get().user.name ? "game" : "chooseName",
             game: { ...data },
           },
         });
@@ -78,6 +86,42 @@ export const useUserStore = create<UserProps>()(
         set({
           user: initialUserState.user,
         });
+      },
+      joinRoom: async (roomId: string | null) => {
+        if (!roomId) {
+          console.error("No room id provided");
+          return;
+        }
+
+        const data = await checkRoomExists(roomId);
+        if (data.error) {
+          console.error(data.error);
+          return;
+        }
+        const user = get().user;
+        if (user.id) {
+          set({
+            user: {
+              ...user,
+              currentStep: "game",
+              game: {
+                id: data.id,
+                name: data.name,
+              },
+            },
+          });
+        } else {
+          set({
+            user: {
+              ...user,
+              currentStep: "chooseName",
+              game: {
+                id: data.id,
+                name: data.name,
+              },
+            },
+          });
+        }
       },
     }),
     { name: "user-store" },

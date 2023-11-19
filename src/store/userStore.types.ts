@@ -24,4 +24,5 @@ export interface UserProps {
   exitGame: () => void;
   loginWithLocalStorage: (id: string, name: string) => void;
   logout: () => void;
+  joinRoom: (roomId: string | null) => void;
 }

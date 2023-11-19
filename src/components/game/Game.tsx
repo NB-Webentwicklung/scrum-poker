@@ -10,23 +10,7 @@ import GameNavigation from "./GameNavigation";
 const Game = () => {
   const [revealed, setRevealed] = useState(false);
 
-  const urlSearchParam = useSearchParams();
-  const roomId = urlSearchParam.get("roomId");
-
   const user = useUserStore((state) => state.user);
-
-  useEffect(() => {
-    const fetchGame = async () => {
-      const response = await fetch(`/api/room/${roomId}`);
-      const res = await response.json();
-      if (res.error) {
-        console.error(res.error);
-      } else {
-        console.log("room exists: ", res);
-      }
-    };
-    fetchGame();
-  }, [roomId]);
 
   if (!user.game?.id)
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import { useUserStore } from "@/store/userStore";
 import {
@@ -19,17 +19,6 @@ interface LandingProps {
 
 const Landing = ({ startAction }: LandingProps) => {
   const user = useUserStore((state) => state.user);
-  const loginWithLocalStorage = useUserStore(
-    (state) => state.loginWithLocalStorage,
-  );
-
-  useEffect(() => {
-    const id = localStorage.getItem("playerId");
-    const name = localStorage.getItem("playerName");
-    if (id && name) {
-      loginWithLocalStorage(id, name);
-    }
-  }, [loginWithLocalStorage]);
 
   const icons = [faGoogle, faMicrosoft, faApple, faMeta];
   return (
