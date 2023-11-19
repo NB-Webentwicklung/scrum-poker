@@ -2,13 +2,14 @@ import React from "react";
 import clsx from "clsx";
 
 interface PlayerProps {
+  name: string | null;
   revealed: boolean;
   className?: string;
 }
 
-const Player = ({ revealed, className }: PlayerProps) => {
+const Player = ({ name, revealed, className }: PlayerProps) => {
   return (
-    <div className={clsx(className)}>
+    <div className={clsx("h-40", className)}>
       <div className='flex justify-center'>
         <div
           className={clsx(
@@ -19,7 +20,7 @@ const Player = ({ revealed, className }: PlayerProps) => {
           <p className={clsx("text-2xl", !revealed && "hidden")}>5</p>
         </div>
       </div>
-      <p className='text-center font-bold pt-2'>Niklas</p>
+      <p className='text-center font-medium pt-2'>{name ?? "-"}</p>
     </div>
   );
 };

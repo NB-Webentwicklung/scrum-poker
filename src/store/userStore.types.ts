@@ -1,8 +1,14 @@
 export type CurrentStep = "landing" | "createGame" | "chooseName" | "game";
 
+export interface IPlayer {
+  id: string;
+  name: string;
+}
+
 export interface IGame {
   id: string;
   name: string;
+  players: IPlayer[] | null;
 }
 
 export interface IUser {

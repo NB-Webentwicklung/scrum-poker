@@ -98,6 +98,7 @@ export const useUserStore = create<UserProps>()(
           console.error(data.error);
           return;
         }
+
         const user = get().user;
         if (user.id) {
           set({
@@ -107,6 +108,7 @@ export const useUserStore = create<UserProps>()(
               game: {
                 id: data.id,
                 name: data.name,
+                players: data.players,
               },
             },
           });
@@ -118,6 +120,7 @@ export const useUserStore = create<UserProps>()(
               game: {
                 id: data.id,
                 name: data.name,
+                players: data.players,
               },
             },
           });
