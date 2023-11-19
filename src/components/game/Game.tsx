@@ -6,24 +6,14 @@ import clsx from "clsx";
 
 import Player from "../Player";
 import GameNavigation from "./GameNavigation";
+import RoomNotFound from "./RoomNotFound";
 
 const Game = () => {
   const [revealed, setRevealed] = useState(false);
 
   const user = useUserStore((state) => state.user);
 
-  if (!user.game?.id)
-    return (
-      <div>
-        <p className='text-center '>Room doesn&apos;t exist.</p>
-        <Link
-          className='flex justify-center w-fit mx-auto px-6 py-2 bg-blue-300 rounded-lg mt-2 hover:bg-blue-400'
-          href='/'
-        >
-          Create new room
-        </Link>
-      </div>
-    );
+  if (!user.game?.id) return <RoomNotFound />;
 
   return (
     <div>

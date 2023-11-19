@@ -10,9 +10,9 @@ async function fetchWithJson(url: string, method: string, body?: any) {
     body: JSON.stringify(body),
   });
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! Status: ${response.status}`);
-  }
+  // if (!response.ok) {
+  //   throw new Error(`HTTP error! Status: ${response.status}`);
+  // }
 
   return response.json();
 }
