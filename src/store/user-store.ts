@@ -35,37 +35,46 @@ export const useUserStore = create<UserProps>()(
       createUserId: () => {
         set({
           user: {
-            id: generateRandomId(),
+            id: "default",
             currentStep: "createGame",
             game: null,
           },
         });
       },
-      createGame: (name) => {
+      createGame: async (name) => {
         const user = get().user;
         if (user) {
+          const res = await fetch("http://localhost:3000/api/room", {
+            method: "POST",
+            body: JSON.stringify({ name }),
+          });
+          const data = await res.json();
           set({
             user: {
               ...user,
               currentStep: "chooseName",
-              game: {
-                id: generateRandomId(),
-                name,
-              },
+              game: { id: data.id, name: data.name },
             },
           });
         } else {
           console.error("No user found");
         }
       },
-      joinGame: (name: string) => {
+      joinGame: async (name: string) => {
         const user = get().user;
         if (user) {
+          const res = await fetch("http://localhost:3000/api/player", {
+            method: "POST",
+            body: JSON.stringify({ name, roomId: user.game?.id }),
+          });
+          const data = await res.json();
+
           set({
             user: {
               ...user,
               currentStep: "game",
-              name,
+              id: data.id,
+              name: data.name,
             },
           });
         } else {
