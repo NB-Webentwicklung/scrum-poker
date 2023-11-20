@@ -1,5 +1,7 @@
 import React from "react";
+import { useRouter } from "next/navigation";
 import { GameScheama } from "@/schemas/schema";
+import { useUserStore } from "@/store/userStore";
 import { Form, Formik } from "formik";
 
 import ButtonUI from "../../ui/ButtonUI";
@@ -8,22 +10,32 @@ import WizardNavigation from "../WizardNavigation";
 
 interface CreateGameProps {
   createGameAction: (game: string) => void;
+  createGameDirectAction: (game: string) => void;
   goBack: () => void;
 }
 
-const CreateGame = ({ createGameAction, goBack }: CreateGameProps) => {
+const CreateGame = ({
+  createGameAction,
+  createGameDirectAction,
+  goBack,
+}: CreateGameProps) => {
+  const user = useUserStore((state) => state.user);
+  const router = useRouter();
+
   return (
     <div className='w-1/2 mx-auto'>
       <WizardNavigation goBack={goBack} />
       <Formik
         initialValues={{ game: "" }}
         validationSchema={GameScheama}
-        onSubmit={(values) => {
-          createGameAction(values.game);
-          // TODO: go direct to game if localStorage has a name
-          // if (user.name) {
-          //   router.push(`/?roomId=${user?.game?.id}`);
-          // }
+        onSubmit={async (values) => {
+          if (user.name) {
+            // NOTE: await has an impact
+            const roomId = await createGameDirectAction(values.game);
+            router.push(`/?roomId=${roomId}`);
+          } else {
+            createGameAction(values.game);
+          }
         }}
       >
         {({ errors }) => (

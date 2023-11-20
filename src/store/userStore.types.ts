@@ -25,7 +25,8 @@ export interface InitialUserStateProps {
 export interface UserProps {
   user: IUser;
   changeStep: (step: CurrentStep) => void;
-  createGame: (name: string) => void;
+  createGame: (name: string) => Promise<void>;
+  createGameDirect: (name: string) => Promise<string>;
   createUser: (name: string) => void;
   exitGame: () => void;
   loginWithLocalStorage: (id: string, name: string) => void;

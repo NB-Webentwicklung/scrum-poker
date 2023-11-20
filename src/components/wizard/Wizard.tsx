@@ -10,6 +10,7 @@ const Wizard = () => {
   const user = useUserStore((state) => state.user);
 
   const createGame = useUserStore((state) => state.createGame);
+  const createGameDirect = useUserStore((state) => state.createGameDirect);
   const createUser = useUserStore((state) => state.createUser);
   const changeStep = useUserStore((state) => state.changeStep);
 
@@ -18,13 +19,14 @@ const Wizard = () => {
       return (
         <CreateGame
           createGameAction={createGame}
+          createGameDirectAction={createGameDirect}
           goBack={() => changeStep("landing")}
         />
       );
     case "chooseName":
       return (
         <ChooseName
-          createGameAction={createUser}
+          createUserAction={createUser}
           goBack={() => {
             changeStep("createGame");
           }}

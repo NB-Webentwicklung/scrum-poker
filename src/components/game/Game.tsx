@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useUserStore } from "@/store/userStore";
 import clsx from "clsx";
 
-import Player from "../Player";
 import GameNavigation from "./GameNavigation";
+import PlayersCards from "./PlayersCards";
 import RoomNotFound from "./RoomNotFound";
 
 const Game = () => {
@@ -28,19 +26,9 @@ const Game = () => {
   return (
     <div>
       <GameNavigation />
-      <div className='py-20'>
-        <div className='h-40 flex space-x-6 justify-center'>
-          {user.game?.players?.map((player) => (
-            <Player
-              key={player.id}
-              name={player.name}
-              revealed={revealed}
-              className='pt-8'
-            />
-          ))}
-        </div>
+      <PlayersCards players={user.game.players}>
         <div className='flex justify-center'>
-          <div className='border-2 border-slate-600 w-1/2 rounded-lg p-8 h-40 flex justify-center items-center'>
+          <div className='border-2 border-slate-600 w-2/3 rounded-lg p-8 h-40 flex justify-center items-center'>
             <button
               onClick={() => setRevealed(!revealed)}
               className={clsx(
@@ -51,10 +39,7 @@ const Game = () => {
             </button>
           </div>
         </div>
-        <div className='h-36'>
-          <Player name={user.name} revealed={revealed} className='pt-8' />
-        </div>
-      </div>
+      </PlayersCards>
     </div>
   );
 };

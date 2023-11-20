@@ -38,10 +38,21 @@ export const useUserStore = create<UserProps>()(
         set({
           user: {
             ...get().user,
-            currentStep: get().user.name ? "game" : "chooseName",
+            currentStep: "chooseName",
             game: { ...data },
           },
         });
+      },
+      createGameDirect: async (name) => {
+        const data = await createGameRoom(name);
+        set({
+          user: {
+            ...get().user,
+            currentStep: "game",
+            game: { ...data },
+          },
+        });
+        return data.id;
       },
       createUser: async (name: string) => {
         const user = get().user;

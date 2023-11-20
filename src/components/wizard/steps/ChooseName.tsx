@@ -9,11 +9,11 @@ import InputUI from "../../ui/InputUI";
 import WizardNavigation from "../WizardNavigation";
 
 interface ChooseNameProps {
-  createGameAction: (name: string) => void;
+  createUserAction: (name: string) => void;
   goBack: () => void;
 }
 
-const ChooseName = ({ createGameAction, goBack }: ChooseNameProps) => {
+const ChooseName = ({ createUserAction, goBack }: ChooseNameProps) => {
   const user = useUserStore((state) => state.user);
   const router = useRouter();
 
@@ -24,7 +24,7 @@ const ChooseName = ({ createGameAction, goBack }: ChooseNameProps) => {
         initialValues={{ name: "" }}
         validationSchema={NameSchema}
         onSubmit={(values) => {
-          createGameAction(values.name);
+          createUserAction(values.name);
           router.push(`/?roomId=${user?.game?.id}`);
         }}
       >
