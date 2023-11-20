@@ -14,12 +14,21 @@ model Room {
   players Player[]
 }
 
+enum Role {
+  player
+  admin
+}
+
 model Player {
-  id     Int    @id @default(autoincrement())
-  name   String
-  roomId Int
-  room   Room   @relation(fields: [roomId], references: [id])
-  votes  Vote[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  roomId    Int
+  createdAt DateTime @default(now())
+  lastLogin DateTime @default(now())
+  isActive  Boolean  @default(true)
+  role      Role     @default(player)
+  room      Room     @relation(fields: [roomId], references: [id])
+  votes     Vote[]
 
   @@index([roomId])
 }
@@ -27,7 +36,7 @@ model Player {
 model Vote {
   id       Int    @id @default(autoincrement())
   playerId Int
-  vote     String
+  vote     Int
   player   Player @relation(fields: [playerId], references: [id])
 
   @@index([playerId])
