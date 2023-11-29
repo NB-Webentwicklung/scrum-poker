@@ -24,6 +24,9 @@ const PlayersCards = ({ children, players }: PlayersCardsProps) => {
 
   return (
     <div className='pt-16'>
+      <p className='text-center px-4 py-2 bg-orange-200 rounded-lg w-fit mx-auto'>
+        Warning: The game logic is currently in developement.
+      </p>
       <div className='h-40 flex space-x-6 justify-center'>
         {(() => {
           switch (testTotalPlayers) {
@@ -70,9 +73,7 @@ const PlayersCards = ({ children, players }: PlayersCardsProps) => {
         })} */}
       </div>
       <div className='flex justify-center'>
-        <div>Left Side</div>
         <div className='py-6 w-full'>{children}</div>
-        <div>Right Side</div>
       </div>
       <div className='h-40'>
         {/* User of Website */}
