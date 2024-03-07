@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import StartImage from "public/start.png";
 
-import UserHeader from "@/components/UserHeader";
+import UserHeader from "@/components/user/UserHeader";
 
 import IconUI from "../../ui/IconUI";
 
@@ -19,13 +19,11 @@ interface LandingProps {
 
 const Landing = ({ startAction }: LandingProps) => {
   const user = useUserStore((state) => state.user);
-
   const icons = [faGoogle, faMicrosoft, faApple, faMeta];
+
   return (
     <div className='md:mt-40'>
-      {user.name && (
-        <UserHeader playerName={user.name} startAction={startAction} />
-      )}
+      {user.name && <UserHeader startAction={startAction} />}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='py-10'>
           <h1 className='text-4xl font-bold'>
