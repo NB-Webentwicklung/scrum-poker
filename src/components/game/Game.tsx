@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "@/store/userStore";
 import clsx from "clsx";
 
@@ -14,6 +14,7 @@ const Game = () => {
   const joinRoom = useUserStore((state) => state.joinRoom);
 
   useEffect(() => {
+    // TODO: also runs on the no room found (No room id provided)
     const intervalId = setInterval(() => {
       joinRoom(user.game?.id ?? "");
     }, 1000);
